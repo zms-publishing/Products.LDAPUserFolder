@@ -1,16 +1,16 @@
 .. image:: https://api.travis-ci.org/zmsdev/Products.LDAPUserFolder4.svg?branch=master
    :target: https://travis-ci.org/zmsdev/Products.LDAPUserFolder4
 
-=========================
- Products.LDAPUserFolder
-=========================
+==========================
+ Products.LDAPUserFolder4
+==========================
 This product is a replacement for a Zope 4 user folder. It does not store its 
 own user objects but builds them on the fly after authenticating a user against 
 the LDAP database.
 
 
 To dos
-""""""
+======
 * fix tests: Python 3 str/bytes-handling was fixed in implementation against a real LDAP database, dataflake.fakeldap has to be reworked.
 * publish on pypi
 * reintegrate with dataflake/Products.LDAPUserFolder
