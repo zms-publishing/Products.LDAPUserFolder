@@ -1,36 +1,19 @@
-.. image:: https://api.travis-ci.org/dataflake/Products.LDAPUserFolder.svg?branch=master
-   :target: https://travis-ci.org/dataflake/Products.LDAPUserFolder
-
-.. image:: https://readthedocs.org/projects/productsldapuserfolder/badge/?version=latest
-   :target: https://productsldapuserfolder.readthedocs.io
-   :alt: Documentation Status
-
-.. image:: https://img.shields.io/pypi/v/Products.LDAPUserFolder.svg
-   :target: https://pypi.python.org/pypi/Products.LDAPUserFolder
-   :alt: PyPI
-
-.. image:: https://img.shields.io/pypi/pyversions/Products.LDAPUserFolder.svg
-   :target: https://pypi.python.org/pypi/Products.LDAPUserFolder
-   :alt: Python versions
+.. image:: https://api.travis-ci.org/zmsdev/Products.LDAPUserFolder4.svg?branch=master
+   :target: https://travis-ci.org/zmsdev/Products.LDAPUserFolder4
 
 =========================
  Products.LDAPUserFolder
 =========================
-This product is a replacement for a Zope user folder. It does not store its 
+This product is a replacement for a Zope 4 user folder. It does not store its 
 own user objects but builds them on the fly after authenticating a user against 
 the LDAP database.
 
 
-Documentation
-=============
-Documentation is available at
-https://productsldapuserfolder.readthedocs.io/
-
-
-Bug tracker
-===========
-A bug tracker is available at
-https://github.com/dataflake/Products.LDAPUserFolder/issues
+To dos
+""""""
+* fix tests: Python 3 str/bytes-handling was fixed in implementation against a real LDAP database, dataflake.fakeldap has to be reworked.
+* publish on pypi
+* reintegrate with dataflake/Products.LDAPUserFolder
 
 
 Debugging problems
