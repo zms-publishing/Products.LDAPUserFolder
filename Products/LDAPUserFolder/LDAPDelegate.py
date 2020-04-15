@@ -192,6 +192,11 @@ class LDAPDelegate(Persistent):
                 user_dn = user_pwd = ''
 
         conn = getResource('%s-connection' % self._hash)
+
+        # added by UzK: don't try to bind a not LDAP user (e.g. Zope Manager)
+        if user_dn == user_pwd == '':
+          return conn
+
         try:
             conn.simple_bind_s(user_dn, user_pwd)
             conn.search_s(self.u_base, self.BASE, '(objectClass=*)')
@@ -211,9 +216,10 @@ class LDAPDelegate(Persistent):
                                         op_timeout=server['op_timeout'])
                 return newconn
             except (ldap.SERVER_DOWN, ldap.TIMEOUT,
-                    ldap.INVALID_CREDENTIALS):
+                    ldap.INVALID_CREDENTIALS) as err:
+                e = err
                 continue
-
+        
         # If we get here it means either there are no servers defined or we
         # tried them all. Try to produce a meaningful message and raise
         # an exception.
