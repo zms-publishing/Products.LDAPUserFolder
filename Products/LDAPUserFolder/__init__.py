@@ -27,4 +27,3 @@ def initialize(context):
     # make sure the default LDAPDelegate class is registered
     from Products.LDAPUserFolder import LDAPDelegate  # noqa: F401
 
-    context.registerHelp()
