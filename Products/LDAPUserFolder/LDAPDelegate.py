@@ -194,8 +194,8 @@ class LDAPDelegate(Persistent):
         conn = getResource('%s-connection' % self._hash)
 
         # added by UzK: don't try to bind a not LDAP user (e.g. Zope Manager)
-        if user_dn == user_pwd == '':
-          return conn
+        # if user_dn == user_pwd == '':
+        #   return conn
 
         try:
             conn.simple_bind_s(user_dn, user_pwd)
