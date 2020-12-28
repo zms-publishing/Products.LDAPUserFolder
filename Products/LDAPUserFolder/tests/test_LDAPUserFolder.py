@@ -24,13 +24,13 @@ from AccessControl.SecurityManagement import newSecurityManager
 from AccessControl.SecurityManagement import noSecurityManager
 from App.Common import package_home
 
-from Products.LDAPUserFolder.tests.base.dummy import LDAPDummyUser
-from Products.LDAPUserFolder.tests.base.testcase import LDAPTest
-from Products.LDAPUserFolder.tests.config import alternates
-from Products.LDAPUserFolder.tests.config import defaults
-from Products.LDAPUserFolder.tests.config import manager_user
-from Products.LDAPUserFolder.tests.config import user
-from Products.LDAPUserFolder.tests.config import user2
+from .base.dummy import LDAPDummyUser
+from .base.testcase import LDAPTest
+from .config import alternates
+from .config import defaults
+from .config import manager_user
+from .config import user
+from .config import user2
 
 
 dg = defaults.get
@@ -41,7 +41,6 @@ u2g = user2.get
 
 class TestLDAPUserFolder(LDAPTest):
 
-    """
     def testLUFInstantiation(self):
         acl = self.folder.acl_users
         ae = self.assertEqual
@@ -840,7 +839,3 @@ class TestLDAPUserFolder(LDAPTest):
         self.assertFalse(acl._cache('anonymous').get('user1'))
         self.assertFalse(acl._cache('negative').get('user1'))
         self.assertFalse(acl._hash == old_hash)
-    """
-
-    def testPass(self):
-      pass

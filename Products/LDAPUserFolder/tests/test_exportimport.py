@@ -18,11 +18,10 @@ import unittest
 from OFS.Folder import Folder
 from Zope2.App import zcml
 
-from Products.LDAPUserFolder.LDAPUserFolder import LDAPUserFolder
+from ..LDAPUserFolder import LDAPUserFolder
 
 
 try:
-    import LET_ME_FAIL_WITH_IMPORT_ERROR
     import Products.GenericSetup as GenericSetup
     from Products.GenericSetup.testing import BodyAdapterTestCase
     from Products.GenericSetup.testing import ExportImportZCMLLayer
@@ -38,8 +37,7 @@ class LDAPUserFolderXMLAdapterTests(BodyAdapterTestCase, unittest.TestCase):
     layer = ExportImportZCMLLayer
 
     def _getTargetClass(self):
-        from Products.LDAPUserFolder.exportimport \
-                import LDAPUserFolderXMLAdapter
+        from ..exportimport import LDAPUserFolderXMLAdapter
 
         return LDAPUserFolderXMLAdapter
 
@@ -91,8 +89,7 @@ class LDAPUserFolderExportTests(_LDAPUserFolderSetup):
 
     def test_unchanged(self):
         from Products.GenericSetup.tests.common import DummyExportContext
-        from Products.LDAPUserFolder.exportimport import \
-            exportLDAPUserFolder
+        from ..exportimport import exportLDAPUserFolder
 
         site = self._initSite(use_changed=False)
         context = DummyExportContext(site)
@@ -106,8 +103,7 @@ class LDAPUserFolderExportTests(_LDAPUserFolderSetup):
 
     def test_changed(self):
         from Products.GenericSetup.tests.common import DummyExportContext
-        from Products.LDAPUserFolder.exportimport import \
-            exportLDAPUserFolder
+        from ..exportimport import exportLDAPUserFolder
 
         site = self._initSite(use_changed=True)
         context = DummyExportContext(site)
@@ -124,8 +120,7 @@ class LDAPUserFolderImportTests(_LDAPUserFolderSetup):
 
     def test_normal(self):
         from Products.GenericSetup.tests.common import DummyImportContext
-        from Products.LDAPUserFolder.exportimport import \
-            importLDAPUserFolder
+        from ..exportimport import importLDAPUserFolder
 
         site = self._initSite()
         acl = site.acl_users
@@ -181,8 +176,8 @@ class LDAPUserFolderImportTests(_LDAPUserFolderSetup):
 
     def test_servers_purge(self):
         from Products.GenericSetup.tests.common import DummyImportContext
-        from Products.LDAPUserFolder.exportimport import \
-            importLDAPUserFolder
+
+        from ..exportimport import importLDAPUserFolder
 
         site = self._initSite(use_changed=True)
         acl = site.acl_users
@@ -202,8 +197,8 @@ class LDAPUserFolderImportTests(_LDAPUserFolderSetup):
 
     def test_servers_nopurge(self):
         from Products.GenericSetup.tests.common import DummyImportContext
-        from Products.LDAPUserFolder.exportimport import \
-            importLDAPUserFolder
+
+        from ..exportimport import importLDAPUserFolder
 
         site = self._initSite(use_changed=True)
         acl = site.acl_users
@@ -229,8 +224,8 @@ class LDAPUserFolderImportTests(_LDAPUserFolderSetup):
 
     def test_schema_purge(self):
         from Products.GenericSetup.tests.common import DummyImportContext
-        from Products.LDAPUserFolder.exportimport import \
-            importLDAPUserFolder
+
+        from ..exportimport import importLDAPUserFolder
 
         site = self._initSite(use_changed=True)
         acl = site.acl_users
@@ -245,8 +240,8 @@ class LDAPUserFolderImportTests(_LDAPUserFolderSetup):
 
     def test_schema_nopurge(self):
         from Products.GenericSetup.tests.common import DummyImportContext
-        from Products.LDAPUserFolder.exportimport import \
-            importLDAPUserFolder
+
+        from ..exportimport import importLDAPUserFolder
 
         site = self._initSite(use_changed=True)
         acl = site.acl_users
