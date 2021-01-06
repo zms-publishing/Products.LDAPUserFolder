@@ -202,9 +202,9 @@ class TestLDAPUserFolder(LDAPTest):
             acl.manage_addGroup(role)
             acl.manage_addGroupMapping(role, role)
         msg = acl.manage_addUser(REQUEST=None, kwargs=user)
-        self.assertTrue(not msg)
+        self.assertEquals(msg, "")
         msg = acl.manage_addUser(REQUEST=None, kwargs=user)
-        self.assertTrue(msg.split(' ')[0] == 'ALREADY_EXISTS')
+        self.assertEquals(msg.split(' ')[0], 'ALREADY_EXISTS')
         user_ob = acl.getUser(ug(acl.getProperty('_login_attr')))
         self.assertNotEqual(user_ob, None)
         for role in ug('user_roles'):

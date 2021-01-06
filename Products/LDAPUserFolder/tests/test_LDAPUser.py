@@ -15,6 +15,7 @@
 import os
 import unittest
 
+import six
 from App.Common import package_home
 from DateTime.DateTime import DateTime
 
@@ -70,10 +71,10 @@ class TestLDAPUser(unittest.TestCase):
     def testUnicodeAttributes(self):
         # Internally, most attributes are stored as unicode.
         # Test some to make sure.
-        self.assertTrue(isinstance(self.u_ob.id, str))
-        self.assertTrue(isinstance(self.u_ob.name, str))
+        self.assertTrue(isinstance(self.u_ob.id, six.text_type))
+        self.assertTrue(isinstance(self.u_ob.name, six.text_type))
         self.assertTrue(isinstance(self.u_ob._properties['givenName'],
-                                   str))
+                                   six.text_type))
 
     def testBinaryAttributes(self):
         # Some attributes are marked binary
@@ -99,5 +100,5 @@ class TestLDAPUser(unittest.TestCase):
     def testNameIdNotUnicode(self):
         # Make sure name and ID are never unicode
         u = self.u_ob
-        self.assertFalse(isinstance(u.getUserName(), bytes))
-        self.assertFalse(isinstance(u.getId(), bytes))
+        self.assertFalse(isinstance(u.getUserName(), six.binary_type))
+        self.assertFalse(isinstance(u.getId(), six.binary_type))

@@ -39,6 +39,9 @@ u2g = user2.get
 class LDAPTest(unittest.TestCase):
 
     def setUp(self):
+        from dataflake.fakeldap import TREE
+        self.db = TREE
+        self.db.clear()
         transaction.begin()
         self.app = self.root = ZopeTestCase.app()
         self.root._setObject('luftest', Folder('luftest'))
@@ -55,9 +58,6 @@ class LDAPTest(unittest.TestCase):
                         local_groups=dg('local_groups'),
                         implicit_mapping=dg('implicit_mapping'),
                         encryption=dg('encryption'), read_only=dg('read_only'))
-        from dataflake.fakeldap import TREE
-        self.db = TREE
-        self.db.clear()
         self.db.addTreeItems(dg('users_base'))
         self.db.addTreeItems(dg('groups_base'))
 
