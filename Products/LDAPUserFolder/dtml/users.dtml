@@ -325,7 +325,7 @@ function toggleSelect() {
                   <tr>
                     <td class="zmi-object-check text-right"><input type="checkbox" name="dns:list" value="&dtml-sk;" /></td>
                     <td class="zmi-user-dn"><a href="<dtml-var expr="'%s?user_dn=' % URL0">&dtml.url_quote-sk;">&dtml-sk;</a></td>
-                    <td class="zmi-user-si"><dtml-var expr="_.string.join(si, ', ')"></td>
+                    <td class="zmi-user-si"><dtml-var expr="', '.join(si)"></td>
                   </tr>
                 </dtml-let>
               </dtml-in>
