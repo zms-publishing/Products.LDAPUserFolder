@@ -234,7 +234,6 @@ class LDAPUserFolder(BasicUserFolder):
 
         user_attrs = res['results'][0]
         dn = user_attrs.get('dn')
-        utf8_dn = to_utf8(dn)
 
         if pwd is not None:
             # Step 2: Re-bind using the password passed in and the DN we
@@ -252,7 +251,7 @@ class LDAPUserFolder(BasicUserFolder):
                 # are one-way encoded I must ask the LDAP server to verify
                 # the password, I cannot do it myself.
                 try:
-                    self._delegate.connect(bind_dn=utf8_dn, bind_pwd=pwd)
+                    self._delegate.connect(bind_dn=user_dn, bind_pwd=user_pwd)
                 except Exception:
                     # Something went wrong, most likely bad credentials
                     msg = '_lookupuserbyattr: Binding as "%s" fails' % dn
@@ -261,7 +260,7 @@ class LDAPUserFolder(BasicUserFolder):
 
             logger.debug('_lookupuserbyattr: Re-binding as "%s"' % user_dn)
 
-            auth_res = self._delegate.search(base=utf8_dn,
+            auth_res = self._delegate.search(base=user_dn,
                                              scope=self._delegate.BASE,
                                              filter='(objectClass=*)',
                                              attrs=known_attrs,
