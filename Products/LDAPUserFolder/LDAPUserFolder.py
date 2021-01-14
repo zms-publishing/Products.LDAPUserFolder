@@ -260,7 +260,7 @@ class LDAPUserFolder(BasicUserFolder):
 
             logger.debug('_lookupuserbyattr: Re-binding as "%s"' % user_dn)
 
-            auth_res = self._delegate.search(base=user_dn,
+            auth_res = self._delegate.search(base=dn,
                                              scope=self._delegate.BASE,
                                              filter='(objectClass=*)',
                                              attrs=known_attrs,
