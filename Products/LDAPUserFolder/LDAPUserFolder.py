@@ -239,9 +239,11 @@ class LDAPUserFolder(BasicUserFolder):
             # Step 2: Re-bind using the password passed in and the DN we
             #         looked up in Step 1. This will catch bad passwords.
             if self._binduid_usage != 1:
+                # case user auth
                 user_dn = dn
                 user_pwd = pwd
             else:
+                # case connection binding
                 user_dn = self._binduid
                 user_pwd = self._bindpwd
 
@@ -258,7 +260,7 @@ class LDAPUserFolder(BasicUserFolder):
                     logger.debug(msg)
                     return None, None, None, None
 
-            logger.debug('_lookupuserbyattr: Re-binding as "%s"' % user_dn)
+            logger.debug('_lookupuserbyattr: Re-binding as "%s"' % dn)
 
             auth_res = self._delegate.search(base=dn,
                                              scope=self._delegate.BASE,
@@ -268,10 +270,24 @@ class LDAPUserFolder(BasicUserFolder):
                                              bind_pwd=user_pwd)
 
             if auth_res['size'] == 0 or auth_res['exception']:
+                # no results for username found
                 msg = '_lookupuserbyattr: "%s" lookup fails bound as "%s"' % (
                     dn, user_dn)
                 logger.debug(msg)
                 return None, None, None, None
+            else:
+                # username found, validate the entered password
+                auth_res = self._delegate.search(base=dn,
+                                    scope=self._delegate.BASE,
+                                    filter='(objectClass=*)',
+                                    attrs=known_attrs,
+                                    bind_dn=dn,
+                                    bind_pwd=pwd)
+                if auth_res['size'] == 0 or auth_res['exception']:
+                    # wrong password
+                    msg = '_lookupuserbyattr: "%s" tried wrong password"' % (dn)
+                    logger.debug(msg)
+                    return None, None, None, None
 
             user_attrs = auth_res['results'][0]
 
